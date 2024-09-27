@@ -1,22 +1,32 @@
 services:
   monitoring-api:
-    build: .
+    build: 
+      context: .
+      dockerfile: MonitoringService/Dockerfile
     ports:
       - "8080:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
       - sqlserver
+    networks:
+      - mynetwork
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "YourPassword"
+      SA_PASSWORD: "YourStrong!Passw0rd"
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
+    networks:
+      - mynetwork
 
 volumes:
   sqlserver-data:
+
+networks:
+  mynetwork:
+    driver: bridge

@@ -26,6 +26,15 @@ namespace MonitoringService
             });
             builder.Services.AddScoped<IMonitoringService, MonitorService>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -35,7 +44,10 @@ namespace MonitoringService
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+
+            // Use CORS policy
+            app.UseCors("AllowAllOrigins");
 
             app.UseAuthorization();
 
