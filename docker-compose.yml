@@ -11,6 +11,8 @@ services:
       - sqlserver
     networks:
       - mynetwork
+    deploy:
+      replicas: 2
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
