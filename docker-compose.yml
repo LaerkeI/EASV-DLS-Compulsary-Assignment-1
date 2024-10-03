@@ -3,8 +3,12 @@ services:
     build: 
       context: .
       dockerfile: MonitoringService/Dockerfile
-    ports:
-      - "8080:80"
+    #ports:
+    #  - "8080:80"
+    # If I bind the port, I get this error: 
+    #   Error response from daemon: Ports are not available: 
+    #       exposing port TCP 0.0.0.0:8080 -> 0.0.0.0:0: listen tcp 0.0.0.0:8080: 
+    #           bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
@@ -12,6 +16,7 @@ services:
     networks:
       - mynetwork
     deploy:
+      mode: replicated
       replicas: 2
 
   sqlserver:
