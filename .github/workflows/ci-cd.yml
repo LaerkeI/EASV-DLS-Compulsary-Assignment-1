@@ -22,14 +22,14 @@ jobs:
         dotnet-version: '7.0'  # Adjust to match your project .NET version
 
     - name: Restore dependencies
-      run: dotnet restore MonitoringSystem/MonitoringSystem.csproj
+      run: dotnet restore ./MonitoringService.csproj  # Corrected path
 
     - name: Build project
-      run: dotnet build MonitoringService/MonitoringService.csproj --no-restore
+      run: dotnet build ./MonitoringService.csproj --no-restore
     
     # There is no test project so this is not necessary
     #- name: Run tests
-    #  run: dotnet test MonitoringService/MonitoringService.csproj --no-restore
+    #  run: dotnet test ./MonitoringService.csproj --no-restore
 
   dockerize:
     needs: build-and-test
