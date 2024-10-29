@@ -25,10 +25,10 @@ jobs:
         dotnet-version: '7.0'  # Adjust to match your project .NET version
 
     - name: Restore dependencies
-      run: dotnet restore ./MonitoringService.csproj  # Corrected path
+      run: dotnet restore MonitoringService/MonitoringService.csproj
 
     - name: Build project
-      run: dotnet build ./MonitoringService.csproj --no-restore
+      run: dotnet build MonitoringService/MonitoringService.csproj --no-restore
     
     # There is no test project so this is not necessary
     #- name: Run tests
