@@ -56,21 +56,21 @@ jobs:
     - name: Push Docker image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/monitoring-system:latest
 
-  deploy:
-    needs: dockerize
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+  # deploy:
+  #   needs: dockerize
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/master'
 
-    steps:
-    - name: Deploy to server via SSH
-      uses: appleboy/ssh-action@v0.1.5
-      with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ secrets.DEPLOY_PORT }}
-        script: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/monitoring-system:latest
-          docker stop monitoring-system || true
-          docker rm monitoring-system || true
-          docker run -d --name monitoring-system -p 80:80 ${{ secrets.DOCKER_USERNAME }}/monitoring-system:latest
+  #   steps:
+  #   - name: Deploy to server via SSH
+  #     uses: appleboy/ssh-action@v0.1.5
+  #     with:
+  #       host: ${{ secrets.DEPLOY_HOST }}
+  #       username: ${{ secrets.DEPLOY_USER }}
+  #       key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #       port: ${{ secrets.DEPLOY_PORT }}
+  #       script: |
+  #         docker pull ${{ secrets.DOCKER_USERNAME }}/monitoring-system:latest
+  #         docker stop monitoring-system || true
+  #         docker rm monitoring-system || true
+  #         docker run -d --name monitoring-system -p 80:80 ${{ secrets.DOCKER_USERNAME }}/monitoring-system:latest
