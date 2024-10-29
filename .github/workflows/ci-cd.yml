@@ -18,7 +18,6 @@ jobs:
 
     - name: List files
       run: Get-ChildItem -Recurse  # Correct command for PowerShell
-      shell: pwsh  # Specify the shell as PowerShell
 
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
