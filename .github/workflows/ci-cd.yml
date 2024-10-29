@@ -16,9 +16,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: List files
-      run: Get-ChildItem -Recurse  # Correct command for PowerShell
-
+    - name: List files # To make sure the path for csproj is correct
+      run: |
+        ls -R
+    
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
