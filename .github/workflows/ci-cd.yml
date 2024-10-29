@@ -16,6 +16,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: List files
+      run:  dir /s
+
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
